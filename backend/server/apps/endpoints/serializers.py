@@ -1,4 +1,4 @@
-# Serializers will help with packing and unpacking database objects into JSON 
+# Serializers will help with packing and unpacking database objects into JSON
 # objects. In Endpoints and MLAlgorithm serializers, we defined all read-only
 # fields. This is because, we will create and modify our objects only on the
 # server-side.For MLAlgorithmStatus, fields status, created_by, created_at and
@@ -16,6 +16,9 @@ from apps.endpoints.models import Endpoint
 from apps.endpoints.models import MLAlgorithm
 from apps.endpoints.models import MLAlgorithmStatus
 from apps.endpoints.models import MLRequest
+
+# ABtest
+from apps.endpoints.models import ABTest
 
 class EndpointSerializer(serializers.ModelSerializer):
     class Meta:
@@ -65,3 +68,23 @@ class MLRequestSerializer(serializers.ModelSerializer):
             "created_at",
             "parent_mlalgorithm",
         )
+
+class ABTestSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ABTest
+        read_only_fields = (
+            "id",
+            "ended_at",
+            "created_at",
+            "summary",
+        )
+        fields = (
+            "id",
+            "title",
+            "created_by",
+            "created_at",
+            "ended_at",
+            "summary",
+            "parent_mlalgorithm_1",
+            "parent_mlalgorithm_2",
+            )
